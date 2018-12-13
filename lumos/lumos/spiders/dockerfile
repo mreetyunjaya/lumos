@@ -6,4 +6,4 @@ RUN mkdir /crawler
 WORKDIR /crawler
 ADD TweetScraper.py .
 
-CMD scrapy runspider TweetScraperr.py
+CMD scrapy runspider TweetScraper.py
