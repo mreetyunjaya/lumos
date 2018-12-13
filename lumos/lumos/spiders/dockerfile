@@ -4,6 +4,6 @@ RUN pip install scrapy
 RUN pip install requests
 RUN mkdir /crawler
 WORKDIR /crawler
-ADD /lumos/lumos/spiders/TweetScraper.py .
+ADD TweetScraper.py .
 
 CMD scrapy runspider TweetScraperr.py
