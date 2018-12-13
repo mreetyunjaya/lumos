@@ -1,14 +1,9 @@
-FROM infiniteproject/torify:latest
-LABEL Maintainer="James D. Bohrman"
-WORKDIR /lumos/lumos/spiders/
+FROM python:3.6.1
 
-ADD . /lumos/
-COPY /lumos/requirements.txt/ /app/
+RUN pip install scrapy
+RUN pip install requests
+RUN mkdir /crawler
+WORKDIR /crawler
+ADD /lumos/lumos/spiders/TweetScraper.py .
 
-RUN apt-get update
-RUN apt-get -y install python-pip
-RUN pip install -r ../requirements.txt
-
-COPY . .
-EXPOSE 80
-CMD scrapy crawl TweetScraper.py
+CMD scrapy runspider TweetScraperr.py
