@@ -7,6 +7,7 @@ services:
       restart_policy:
         condition: on-failure
 
+    image: 'clue/polipo'
   polipo:
     image: 'clue/polipo'
     links:
@@ -32,10 +33,10 @@ services:
 
   scrapy:
     build:
-      context: ./scrapy
+      context: ./src/scraper
     environment:
-      - elasticsearch=http://db:9200
       - http_proxy=http://polipo:8181
+      - elasticsearch=http://db:9200
       - https_proxy=http://polipo:8181
       - no_proxy=db
       - urls=https://thehiddenwiki.org/
@@ -45,3 +46,14 @@ services:
     deploy:
       restart_policy:
         condition: on-failure
+
+  mysql:
+    image: mysql:5.7
+    restart: always
+    volumes:
+            - ./db:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: password
+      MYSQL_USER: password
+      MYSQL_PASSWORD: password
